@@ -1,0 +1,26 @@
+{
+  "name": "dtcd-devpanel-console",
+  "version": "0.1.0",
+  "description": "DTCD developer panel console tab plugin",
+  "private": true,
+  "homepage": "https://github.com/ISGNeuroTeam/DTCD-DevPanel-Console",
+  "scripts": {
+    "build": "IS_DEV=false vue-cli-service build",
+    "dev": "IS_DEV=true vue-cli-service build --no-clean --watch --mode production"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "",
+  "dependencies": {
+    "core-js": "^3.8.3",
+    "vue": "^2.6.12"
+  },
+  "devDependencies": {
+    "@purtuga/esm-webpack-plugin": "^1.5.0",
+    "@vue/cli-plugin-babel": "~4.5.11",
+    "@vue/cli-service": "~4.5.11",
+    "sass": "^1.32.5",
+    "sass-loader": "^10.1.1",
+    "vue-template-compiler": "^2.6.12"
+  }
+}
