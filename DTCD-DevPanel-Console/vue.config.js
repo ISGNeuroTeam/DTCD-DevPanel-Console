@@ -10,7 +10,7 @@ if (isDev) {
   ]);
 }
 
-const outputDirPath = isDev ? './../../DataCAD/Mock_server/plugins' : './build';
+const outputDirPath = isDev ? './../../DTCD/server/plugins' : './build';
 
 module.exports = {
   filenameHashing: false,
@@ -20,7 +20,7 @@ module.exports = {
     extract: false,
   },
   configureWebpack: {
-    entry: './src/DataCADPlugin.js',
+    entry: './src/Plugin.js',
     output: {
       filename: 'DevPanel-Console.js',
       library: 'DevPanel_Console',
