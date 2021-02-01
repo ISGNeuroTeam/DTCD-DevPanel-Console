@@ -25,10 +25,7 @@
 
 <script>
 import { ConsoleHistory } from '@/utils/ConsoleHistory';
-/* --- expression test ---
-robot.storageSystem.addRecord('myKey', 'Console test value')
-robot.storageSystem.getRecord('myKey')
-*/
+
 export default {
   name: 'ConsoleInputField',
   props: {
@@ -82,10 +79,6 @@ export default {
     onPaste (event) {
       const text = event.clipboardData.getData('text/plain');
       document.execCommand('insertText', false, text);
-      // ! maybe better solution
-      // const selection = window.getSelection();
-      // selection.deleteFromDocument();
-      // selection.getRangeAt(0).insertNode(document.createTextNode(text));
     },
 
     onEnterPress () {
@@ -126,6 +119,7 @@ export default {
     },
 
     createExpressionFunction () {
+      // TODO: Update after console logic revision
       return new Function(`
         const robot = document._DataCAD;
         robot.panelLiveDash = robot.systemGUID.getInstanceByName('PanelLiveDash');
@@ -134,13 +128,14 @@ export default {
     },
 
     executeConsoleExpression () {
-      try {
-        const expression = this.createExpressionFunction();
-        this.addMessage('command', this.expression);
-        this.addMessage('log', expression());
-      } catch (error) {
-        this.addMessage('error', error.message);
-      }
+      console.warn('Console disabled for revision');
+      // try {
+      //   const expression = this.createExpressionFunction();
+      //   this.addMessage('command', this.expression);
+      //   this.addMessage('log', expression());
+      // } catch (error) {
+      //   this.addMessage('error', error.message);
+      // }
     },
 
     addExpressionToHistory () {

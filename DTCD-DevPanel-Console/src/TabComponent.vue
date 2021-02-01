@@ -1,5 +1,5 @@
 <template>
-  <div :id="$root.workPlaceID" class="container">
+  <div :id="$root.tabID" class="container">
     <div class="content">
       <MessageList :messages="consoleMessages"/>
       <AutocompleteTool
