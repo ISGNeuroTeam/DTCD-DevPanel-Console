@@ -27,9 +27,9 @@
 
 <script>
 import autocompleteData from './utils/autocompleteData';
-import MessageList from './components/MessageList';
-import AutocompleteTool from './components/AutocompleteTool';
-import ConsoleInputField from './components/ConsoleInputField';
+import MessageList from './components/MessageList.vue';
+import AutocompleteTool from './components/AutocompleteTool.vue';
+import ConsoleInputField from './components/ConsoleInputField.vue';
 
 export default {
   name: 'TabComponent',
@@ -121,7 +121,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '@/styles/base';
+@import './styles/base';
 
 .container {
   height: 100%;

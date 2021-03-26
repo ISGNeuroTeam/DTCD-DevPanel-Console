@@ -87,7 +87,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '@/styles/base';
+@import './../styles/base';
 
 $autocomplete-item-height: 35px;
 

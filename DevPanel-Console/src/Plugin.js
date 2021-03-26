@@ -1,6 +1,6 @@
 import { ExtensionPlugin } from './../../../DTCD-SDK';
 import pluginMeta from './Plugin.Meta';
-import TabComponent from './TabComponent';
+import TabComponent from './TabComponent.vue';
 
 export class Plugin extends ExtensionPlugin {
 
