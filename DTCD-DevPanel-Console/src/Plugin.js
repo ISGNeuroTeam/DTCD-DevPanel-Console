@@ -1,6 +1,6 @@
 import { ExtensionPlugin } from './../../../DTCD-SDK';
 import pluginMeta from './Plugin.Meta';
-import TabComponent from './TabComponent.vue';
+import PluginComponent from './PluginComponent.vue';
 
 export class Plugin extends ExtensionPlugin {
 
@@ -22,7 +22,7 @@ export class Plugin extends ExtensionPlugin {
 
     new VueJS.default({
       data: () => data,
-      render: (h) => h(TabComponent),
+      render: (h) => h(PluginComponent),
     }).$mount(selector);
   }
 

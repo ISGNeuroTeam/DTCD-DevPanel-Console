@@ -32,7 +32,7 @@ import AutocompleteTool from './components/AutocompleteTool.vue';
 import ConsoleInputField from './components/ConsoleInputField.vue';
 
 export default {
-  name: 'TabComponent',
+  name: 'PluginComponent',
   components: {
     MessageList,
     AutocompleteTool,
