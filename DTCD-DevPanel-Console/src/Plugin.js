@@ -1,4 +1,4 @@
-import { ExtensionPlugin } from './../../../DTCD-SDK';
+import { ExtensionPlugin } from './../DTCD-SDK';
 import pluginMeta from './Plugin.Meta';
 import PluginComponent from './PluginComponent.vue';
 
