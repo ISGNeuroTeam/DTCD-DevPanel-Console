@@ -1,18 +1,15 @@
-import { ExtensionPlugin } from './../DTCD-SDK';
+import { ExtensionPlugin } from './../../DTCD-SDK';
 import pluginMeta from './Plugin.Meta';
 import PluginComponent from './PluginComponent.vue';
 
-export class Plugin extends ExtensionPlugin {
-
-  static getRegistrationMeta () {
+export class DevConsoleTab extends ExtensionPlugin {
+  static getRegistrationMeta() {
     return pluginMeta;
   }
 
-  static getExtensionInfo () {
+  static getExtensionInfo() {}
 
-  }
-
-  constructor (guid, selector) {
+  constructor(guid, selector) {
     super();
 
     const VueJS = this.getDependence('Vue');
@@ -22,8 +19,7 @@ export class Plugin extends ExtensionPlugin {
 
     new VueJS.default({
       data: () => data,
-      render: (h) => h(PluginComponent),
+      render: h => h(PluginComponent),
     }).$mount(selector);
   }
-
 }

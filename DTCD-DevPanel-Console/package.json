@@ -5,6 +5,7 @@
   "private": true,
   "homepage": "https://github.com/ISGNeuroTeam/DTCD-DevPanel-Console",
   "scripts": {
+    "test": "jest",
     "dev": "rollup -cw",
     "build": "rollup -c"
   },

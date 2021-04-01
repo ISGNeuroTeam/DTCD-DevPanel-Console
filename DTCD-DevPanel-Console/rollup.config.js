@@ -9,7 +9,9 @@ import pluginMeta from './src/Plugin.Meta';
 
 const pluginName = pluginMeta.name;
 const watch = Boolean(process.env.ROLLUP_WATCH);
-const fileDest = watch ? `./../../DTCD/server/plugins/${pluginName}.js` : `./../build/${pluginName}.js`;
+const fileDest = watch
+  ? `./../../DTCD/server/plugins/DTCD-${pluginName}/${pluginName}.js`
+  : `./build/${pluginName}.js`;
 
 const plugins = [
   vue(),
