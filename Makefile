@@ -1,9 +1,9 @@
 define ANNOUNCE_BODY
 Required section:
-	build - build project into build directory, with configuration file and environment
-	clean - clean all addition file, build directory and output archive file
-	test - run all tests
-	pack - make output archive
+ build - build project into build directory, with configuration file and environment
+ clean - clean all addition file, build directory and output archive file
+ test - run all tests
+ pack - make output archivne
 Addition section:
 endef
 
@@ -19,18 +19,18 @@ SET_PACK_NAME = $(eval PACK_NAME=$(PROJECT_NAME)-$(VERSION)-$(BRANCH).tar.gz)
 
 DEV_STORAGE = https://storage.dev.isgneuro.com/repository/components
 DTCD_SDK = DTCD-SDK
-DTCD_SDK_URL = $(DEV_STORAGE)/$(DTCD_SDK)/$(DTCD_SDK)-0.1.1-develop-0004.tar.gz
+DTCD_SDK_URL = $(DEV_STORAGE)/$(DTCD_SDK)/$(DTCD_SDK)-0.1.1-develop-0015.tar.gz
 
 .SILENT:
 
-COMPONENTS: sdk
+COMPONENTS: sdk 
 
 export ANNOUNCE_BODY
 
 all:
 	echo "$$ANNOUNCE_BODY"
 
-build: ${PROJECT_NAME}/node_modules COMPONENTS
+build: $(PROJECT_NAME)/node_modules COMPONENTS
 	# required section
 	echo Removing previous build...
 	rm -rf ./build/
@@ -52,15 +52,14 @@ build: ${PROJECT_NAME}/node_modules COMPONENTS
 	echo Building completed;
 	# required section
 
-
 clean:
 	# required section
 	echo Cleaning started...
 	rm -rf ./build/
 	rm -rf *.tar.gz
-	rm -rf ./$(PROJECT_NAME)/build/
+	rm -rf ./$(DTCD_SDK)/
 	rm -rf ./$(PROJECT_NAME)/node_modules/
-	rm -rf ./$(PROJECT_NAME)/package-lock.json
+	rm -rf ./$(PROJECT_NAME)/*-lock.*
 	echo Cleaning completed.
 	# required section
 
@@ -97,4 +96,5 @@ sdk:
 	fi
 
 dev: build
+	cp -rf ./build/$(PROJECT_NAME) ./../DTCD/server/plugins
 	npm run dev --prefix ./$(PROJECT_NAME)
