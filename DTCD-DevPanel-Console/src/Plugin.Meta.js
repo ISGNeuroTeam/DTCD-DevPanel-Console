@@ -1,7 +1,7 @@
 export default {
   type: 'extension',
   target: 'DevPanel',
-  name: 'DevPanel-Console',
+  name: 'DevPanelConsole',
   title: 'Консоль',
   version: '0.1.0',
   withDependencies: true,
