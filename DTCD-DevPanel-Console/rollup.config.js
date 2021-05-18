@@ -1,21 +1,30 @@
-import commonjs from '@rollup/plugin-commonjs';
-import replace from '@rollup/plugin-replace';
 import alias from '@rollup/plugin-alias';
+import vue from 'rollup-plugin-vue';
+import commonjs from '@rollup/plugin-commonjs';
+import resolve from '@rollup/plugin-node-resolve';
+
 import styles from 'rollup-plugin-styles';
-import vue from 'rollup-plugin-vue2';
-
+import replace from '@rollup/plugin-replace';
 import path from 'path';
-import pluginMeta from './src/Plugin.Meta';
 
-const pluginName = pluginMeta.name;
+const pluginName = 'DevPanelConsole';
 const watch = Boolean(process.env.ROLLUP_WATCH);
 const fileDest = watch
   ? `./../../DTCD/server/plugins/DTCD-${pluginName}/${pluginName}.js`
   : `./build/${pluginName}.js`;
 
 const plugins = [
-  vue(),
+  resolve({
+    jsnext: true,
+    preferBuiltins: true,
+    browser: true,
+    dedupe: ['vue'],
+    extensions: ['.mjs', '.js', '.json', '.node', '.vue'],
+  }),
   commonjs(),
+  vue({
+    preprocessStyles: true,
+  }),
   alias({
     entries: {
       '@': path.resolve(__dirname, 'src'),
@@ -23,6 +32,7 @@ const plugins = [
   }),
   styles({
     mode: 'inject',
+    modules: true,
   }),
   replace({
     preventAssignment: true,
