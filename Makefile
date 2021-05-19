@@ -8,7 +8,7 @@ Addition section:
 endef
 
 PROJECT_NAME = DTCD-DevPanel-Console
-PLUGIN_NAME = DevPanelConsole
+PLUGIN_NAME = DevPanel-Console
 
 GENERATE_VERSION = $(shell jq .version ./${PROJECT_NAME}/package.json )
 GENERATE_BRANCH = $(shell git name-rev $$(git rev-parse HEAD) | cut -d\  -f2 | sed -re 's/^(remotes\/)?origin\///' | tr '/' '_')
@@ -23,7 +23,7 @@ DTCD_SDK_URL = $(DEV_STORAGE)/$(DTCD_SDK)/$(DTCD_SDK)-0.1.1-develop-0015.tar.gz
 
 .SILENT:
 
-COMPONENTS: sdk 
+COMPONENTS: sdk
 
 export ANNOUNCE_BODY
 

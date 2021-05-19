@@ -6,12 +6,13 @@ import resolve from '@rollup/plugin-node-resolve';
 import styles from 'rollup-plugin-styles';
 import replace from '@rollup/plugin-replace';
 import path from 'path';
+import pluginMeta from './src/Plugin.Meta';
 
-const pluginName = 'DevPanelConsole';
 const watch = Boolean(process.env.ROLLUP_WATCH);
-const fileDest = watch
-  ? `./../../DTCD/server/plugins/DTCD-${pluginName}/${pluginName}.js`
-  : `./build/${pluginName}.js`;
+
+const pluginName = pluginMeta.name.replace('_','-');
+const outputFile = `${pluginName}.js`;
+const outputDirectory = watch ? `./../../DTCD/server/plugins/DTCD-${pluginName}` : `./build`;
 
 const plugins = [
   resolve({
@@ -45,7 +46,7 @@ export default {
   plugins,
   input: 'src/Plugin.js',
   output: {
-    file: fileDest,
+    file: `${outputDirectory}/${outputFile}`,
     format: 'esm',
     sourcemap: false,
   },
