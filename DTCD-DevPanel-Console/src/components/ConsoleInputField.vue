@@ -41,21 +41,11 @@ export default {
   data: () => ({
     expression: '',
     history: new ConsoleHistory(),
-    customConsoleCommands: ['log', 'info', 'warn', 'error'],
   }),
   watch: {
     autocompletedSentence() {
       this.appplyAutocompleteSentence();
     },
-  },
-  mounted() {
-    this.customConsoleCommands.forEach(command => {
-      const defaultCommand = console[command].bind(console);
-      console[command] = (...args) => {
-        defaultCommand(...args);
-        this.addMessage(command, args);
-      };
-    });
   },
   methods: {
     addMessage(type, text) {
