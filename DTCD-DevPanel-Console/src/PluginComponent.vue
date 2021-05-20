@@ -11,7 +11,7 @@
         @apply-sentence="applyAutocompleteSentence"
       />
     </div>
-    <ConsoleInputField
+    <ConsoleTerminal
       :autocompleteVisible="isAutocompleteVisible"
       :autocompletedSentence="autocompleteSentence"
       @add-message="addConsoleMessage"
@@ -28,14 +28,14 @@
 <script>
 import MessageList from './components/MessageList.vue';
 import AutocompleteTool from './components/AutocompleteTool.vue';
-import ConsoleInputField from './components/ConsoleInputField.vue';
+import ConsoleTerminal from './components/ConsoleTerminal.vue';
 
 export default {
   name: 'PluginComponent',
   components: {
     MessageList,
     AutocompleteTool,
-    ConsoleInputField,
+    ConsoleTerminal,
   },
   data: () => ({
     isAutocompleteVisible: false,
