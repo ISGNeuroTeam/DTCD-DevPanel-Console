@@ -27,7 +27,7 @@
 import { ConsoleHistory } from '@/utils/ConsoleHistory';
 
 export default {
-  name: 'ConsoleInputField',
+  name: 'ConsoleTerminal',
   props: {
     autocompleteVisible: {
       type: Boolean,
