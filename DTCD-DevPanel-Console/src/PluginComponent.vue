@@ -1,7 +1,7 @@
 <template>
   <div :id="$root.tabID" class="container">
     <div class="content">
-      <MessageList :messages="consoleMessages"/>
+      <MessageList :messages="consoleMessages" />
       <AutocompleteTool
         ref="autocomplete"
         :visible="isAutocompleteVisible"
@@ -11,7 +11,7 @@
         @apply-sentence="applyAutocompleteSentence"
       />
     </div>
-    <ConsoleInputField
+    <ConsoleTerminal
       :autocompleteVisible="isAutocompleteVisible"
       :autocompletedSentence="autocompleteSentence"
       @add-message="addConsoleMessage"
@@ -26,17 +26,16 @@
 </template>
 
 <script>
-import autocompleteData from './utils/autocompleteData';
 import MessageList from './components/MessageList.vue';
 import AutocompleteTool from './components/AutocompleteTool.vue';
-import ConsoleInputField from './components/ConsoleInputField.vue';
+import ConsoleTerminal from './components/ConsoleTerminal.vue';
 
 export default {
-  name: 'TabComponent',
+  name: 'PluginComponent',
   components: {
     MessageList,
     AutocompleteTool,
-    ConsoleInputField,
+    ConsoleTerminal,
   },
   data: () => ({
     isAutocompleteVisible: false,
@@ -46,59 +45,59 @@ export default {
     autocompleteDirection: null,
   }),
   computed: {
-    autocompleteSentences () {
-      if (this.consoleExpression === '') return [];
-
-      function find (value) {
-        if (Array.isArray(value)) return value;
-        if (typeof value === 'object') return Object.keys(value);
-        return [value];
-      }
-
-      let tempValue = autocompleteData;
+    autocompleteSentences() {
       const autocompletePath = this.consoleExpression.split('.');
 
-      for (let index = 0; index < autocompletePath.length - 1; index++) {
-        const item = autocompletePath[index];
-        if (tempValue[item]) {
-          tempValue = tempValue[item];
-        } else {
-          tempValue = [];
-          break;
+      if (autocompletePath.length == 1 && 'robot'.startsWith(autocompletePath[0])) {
+        return ['robot'];
+      } else if (autocompletePath.length == 2 && 'robot' === autocompletePath[0]) {
+        return Object.getOwnPropertyNames(Application.autocomplete).filter(prop =>
+          prop.toLowerCase().startsWith(autocompletePath[1].toLowerCase())
+        );
+      } else if (autocompletePath.length > 2 && 'robot'.startsWith(autocompletePath[0])) {
+        let autocompleteObject = Application.autocomplete;
+        let element;
+        for (let i = 1; i < autocompletePath.length - 1; i++) {
+          element = autocompletePath[i];
+          if (element in autocompleteObject) {
+            autocompleteObject = autocompleteObject[element];
+            element = autocompletePath[i + 1];
+          } else return [];
         }
+        if (typeof autocompleteObject == 'function') return [];
+        else if (autocompleteObject?.constructor.name == 'Object') {
+          return Object.keys(autocompleteObject).filter(prop =>
+            prop.toLowerCase().startsWith(element.toLowerCase())
+          );
+        } else if (autocompleteObject?.constructor.name != 'object') {
+          return Object.getOwnPropertyNames(autocompleteObject?.__proto__)
+            .filter(prop => prop !== 'constructor')
+            .filter(prop => prop.toLowerCase().startsWith(element.toLowerCase()));
+        } else return [];
+      } else {
+        return [];
       }
-
-      let sentences = find(tempValue);
-
-      const filteredSentences = sentences.filter(item => {
-        const currentSentence = autocompletePath[autocompletePath.length - 1];
-        return currentSentence === '' ? true : item.startsWith(currentSentence);
-      });
-
-      sentences = filteredSentences;
-
-      return sentences;
     },
   },
   watch: {
-    autocompleteSentences () {
+    autocompleteSentences() {
       this.isAutocompleteVisible = !!this.autocompleteSentences.length > 0;
     },
   },
   methods: {
-    addConsoleMessage ({ type, text }) {
+    addConsoleMessage({ type, text }) {
       this.consoleMessages.push({ type, text: String(text) });
     },
 
-    clearConsoleMessages () {
+    clearConsoleMessages() {
       this.consoleMessages.splice(0, this.consoleMessages.length);
     },
 
-    consoleExpressionUpdate (expression) {
+    consoleExpressionUpdate(expression) {
       this.consoleExpression = expression;
     },
 
-    applyAutocompleteSentence (sentence) {
+    applyAutocompleteSentence(sentence) {
       const expression = this.consoleExpression;
       const splitted = expression.split('.');
       splitted.splice(-1, 1, sentence);
@@ -106,16 +105,15 @@ export default {
       this.autocompleteSentence = resultExpression;
     },
 
-    selectSentenceByConsoleArrowKey (mode) {
+    selectSentenceByConsoleArrowKey(mode) {
       this.$refs.autocomplete.selectSentence(mode);
     },
 
-    applySentenceByConsoleTabKey () {
+    applySentenceByConsoleTabKey() {
       const autocomplete = this.$refs.autocomplete;
       const sentence = this.autocompleteSentences[autocomplete.selectedIndex];
       this.applyAutocompleteSentence(sentence);
     },
-
   },
 };
 </script>
