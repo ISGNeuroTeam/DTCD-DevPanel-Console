@@ -56,28 +56,23 @@ export default {
 
   .message {
     display: flex;
-    align-items: center;
-    min-height: 42px;
     color: #757575;
     border-top: thin solid #E0E0E0;
+    padding: 16px 0;
+    padding-right: 16px;
 
     &:first-child {
       border-top: none;
     }
 
     &.empty {
-      display: flex;
-      align-items: center;
       justify-content: center;
+      align-items: center;
       height: 100%;
       font-size: 20px;
     }
 
-    &.log {
-      color: #757575;
-    }
-
-    &.command {
+    &.log, &.command {
       color: #757575;
     }
 
@@ -97,7 +92,7 @@ export default {
     }
 
     .icon {
-      flex: 0 0 56px;
+      flex: 0 0 50px;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -107,6 +102,8 @@ export default {
     .text {
       font-size: 14px;
       font-family: monospace;
+      word-break: break-all;
+      overflow-wrap: break-word;
     }
   }
 }

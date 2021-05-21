@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Changed
+- css styles in MessageList and ConsoleTerminal
 - plugin build process
 - name of plugin from DevPanel-Console to DevPanel_Console
 - the way autcomplete works

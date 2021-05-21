@@ -1,11 +1,11 @@
 <template>
-  <div class="wrapper">
-    <div class="console-prefix">
-      <i class="fas fa-chevron-right icon" />
+  <div class="console">
+    <div class="prefix">
+      <i class="fas fa-chevron-right"/>
     </div>
     <div
       ref="console"
-      class="console"
+      class="terminal"
       contenteditable="true"
       data-placeholder="Enter your expression..."
       @input="onInput"
@@ -63,6 +63,7 @@ export default {
 
     onInput() {
       this.updateExpression();
+      this.$refs.console.scrollTop = this.$refs.console.scrollHeight;
     },
 
     onPaste(event) {
@@ -71,7 +72,6 @@ export default {
     },
 
     onEnterPress() {
-      console.log(this.expression);
       if (this.expression === '') return;
 
       this.addExpressionToHistory();
@@ -169,6 +169,7 @@ export default {
       let sel = window.getSelection();
       sel?.setPosition(this.$refs.console.childNodes[0], pos);
     },
+
     getCaretIndex(element) {
       let position = 0;
       const isSupported = typeof window.getSelection !== 'undefined';
@@ -194,7 +195,6 @@ export default {
     },
 
     executeConsoleExpression() {
-      // console.warn('Console disabled for revision');
       try {
         const expression = this.createExpressionFunction();
         this.addMessage('command', this.expression);
@@ -247,44 +247,38 @@ export default {
 <style lang="scss" scoped>
 @import './../styles/base';
 
-.wrapper {
+.console {
+  flex: 0 0;
   display: flex;
   background-color: #f5f5f5;
-  box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
-  position: relative;
+  box-shadow: 0 0 3px rgba(0, 0, 0, .5);
 
-  .console-prefix {
-    flex: 0 0 56px;
+  $terminal-line-height: 16px;
+
+  .prefix {
+    flex: 0 0;
     display: flex;
     justify-content: center;
-    padding: 20px 0;
-
-    .icon {
-      font-size: 15px;
-    }
+    padding: $terminal-line-height 20px;
   }
 
-  .console {
-    width: 100%;
-    max-width: 100%;
-    min-width: 0;
-    max-height: 104px;
+  .terminal {
+    flex: 1 0;
+    max-height: $terminal-line-height * 7;
     color: #424242;
     font-size: 14px;
     font-family: monospace;
     outline: none;
-    padding: 20px 0;
+    padding: $terminal-line-height 0;
     padding-right: 20px;
     word-break: break-all;
     overflow-wrap: break-word;
-    white-space: normal;
     overflow-y: auto;
 
     &[contenteditable]:empty:before {
       content: attr(data-placeholder);
-      cursor: text;
       color: #757575;
-      position: absolute;
+      pointer-events: none;
     }
   }
 }
