@@ -10,6 +10,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - init unit tests
 
 ### Changed
+- autocomplete logic
+- components moved to PluginComponent
 - css styles in MessageList and ConsoleTerminal
 - plugin build process
 - name of plugin from DevPanel-Console to DevPanel_Console
@@ -17,5 +19,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - makefile
 
 ### Removed
+- AutocompleteTool, ConsoleTerminal and MessageList components
 - intercepting native browser console methods
 - autocomplete hardcode file
