@@ -7,10 +7,6 @@ export class ConsoleHistory {
     this.currentItem = null;
   }
 
-  setCurrentExpression (expression) {
-    this.newExpression = expression;
-  }
-
   add (item) {
     this.items[this.counter] = item;
     this.currentItem = ++this.counter;

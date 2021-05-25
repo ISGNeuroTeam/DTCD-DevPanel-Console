@@ -1,19 +1,23 @@
-import { ExtensionPlugin } from './../../DTCD-SDK';
+import { ExtensionPlugin, LogSystemAdapter } from './../../DTCD-SDK';
 import pluginMeta from './Plugin.Meta';
 import PluginComponent from './PluginComponent.vue';
 
 export class DevConsoleTab extends ExtensionPlugin {
-  static getRegistrationMeta() {
+
+  static getRegistrationMeta () {
     return pluginMeta;
   }
 
-  static getExtensionInfo() {}
+  static getExtensionInfo () {}
 
-  constructor(guid, selector) {
+  constructor (guid, selector) {
     super();
+
+    const logSystem = new LogSystemAdapter(guid, pluginMeta.name);
 
     const VueJS = this.getDependence('Vue');
     const data = {
+      logSystem,
       tabID: `${pluginMeta.name}-${guid}`,
     };
 
@@ -22,4 +26,5 @@ export class DevConsoleTab extends ExtensionPlugin {
       render: h => h(PluginComponent),
     }).$mount(selector);
   }
+
 }
