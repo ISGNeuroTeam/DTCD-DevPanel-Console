@@ -172,10 +172,12 @@ export default {
     },
 
     createExpressionFunction () {
-      return new Function(`
-        const robot = Application.autocomplete;
-        return (${this.expression});
-      `);
+      const robotRegexp = /robot\.(?=(?:[^'"]*('|")[^'"]*('|"))*[^'"]*$)/g;
+      const expression = this.expression.replaceAll(
+        robotRegexp,
+        'Application.autocomplete.',
+      );
+      return new Function(`return (${expression});`);
     },
 
     executeExpression () {

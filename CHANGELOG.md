@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - init unit tests
 
 ### Changed
+- executed expressionFunction body
 - autocomplete logic
 - components moved to PluginComponent
 - css styles in MessageList and ConsoleTerminal
