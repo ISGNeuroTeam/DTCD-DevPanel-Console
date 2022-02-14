@@ -1,8 +1,10 @@
+import { version } from './../package.json';
+
 export default {
+  version,
   type: 'extension',
   target: 'DevPanel',
   name: 'DevPanel_Console',
   title: 'Консоль',
-  version: '0.1.0',
   withDependencies: true,
 };

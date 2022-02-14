@@ -13,7 +13,7 @@ export class DevConsoleTab extends ExtensionPlugin {
   constructor (guid, selector) {
     super();
 
-    const logSystem = new LogSystemAdapter(guid, pluginMeta.name);
+    const logSystem = new LogSystemAdapter('0.4.0', guid, pluginMeta.name);
 
     const VueJS = this.getDependence('Vue');
     const data = {

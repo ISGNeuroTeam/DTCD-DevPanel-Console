@@ -6,8 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
 ### Added
 - init unit tests
+- version of core systems for adapters
 
 ### Changed
 - executed expressionFunction body
@@ -18,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - name of plugin from DevPanel-Console to DevPanel_Console
 - the way autcomplete works
 - makefile
+- build process in order to make directory name with current version of plugin
 
 ### Removed
 - AutocompleteTool, ConsoleTerminal and MessageList components
